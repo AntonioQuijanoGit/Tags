@@ -4,7 +4,6 @@ const tagsContainer = document.createElement("div");
 const inputTag = document.createElement("span");
 
 inputTagContainer.addEventListener("click", (e) => {
-  console.log(e.target.id);
   if (
     e.target.id === "input-tag" ||
     e.target.classList.contains("tag-container")
@@ -25,7 +24,6 @@ inputTagContainer.appendChild(tagsContainer);
 tagsContainer.appendChild(inputTag);
 
 inputTag.addEventListener("keydown", (e) => {
-  debugger;
   if (e.key === "Enter" && inputTag.textContent !== "") {
     e.preventDefault();
     if (!existTag(inputTag.textContent)) {
@@ -70,6 +68,14 @@ function existTag(value) {
 }
 
 function removeTag(value) {
-  tags = tags.filter((tag) => tag != value);
-  renderTags();
+  const tagElement = Array.from(tagsContainer.querySelectorAll('.tag-item')).find(
+    el => el.textContent.trim().startsWith(value)
+  );
+  if (tagElement) {
+    tagElement.classList.add('removing');
+    setTimeout(() => {
+      tags = tags.filter((tag) => tag != value);
+      renderTags();
+    }, 300);
+  }
 }
