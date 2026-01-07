@@ -1,2 +1,2 @@
 ## Tags
-Modelo sencillo de tags para red social.
+Simple tag model for social network.
